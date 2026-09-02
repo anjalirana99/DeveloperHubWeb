@@ -19,3 +19,7 @@ APP = path "/" -> Body
     store the logged in user n redux store 
     show the profile icon of user once loggedin 
     redirect to feed page after login 
+
+    Security check 
+    redirecting to login page from other pages if user is Unauthorized 
+    fetching profile on refreshing the page as store data removed on refresh even after login
