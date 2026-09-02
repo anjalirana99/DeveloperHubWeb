@@ -10,9 +10,11 @@ const Login = () => {
   const dispatch = useDispatch()
   const [email,setEmail] = useState("rohit@gmail.com")
   const [password, setPassword] = useState("Rohit@123")
+  const [error, setError] = useState("")
   const navigateTo = useNavigate()
 
   const handleSubmit = async()=>{
+    setError("")
     try{
       const res = await axios.post( BASE_URL + '/login',
       {
@@ -28,8 +30,9 @@ const Login = () => {
     navigateTo("/feed")
 
   }
-    catch (err) {
-    console.log("ERROR:", err);
+    catch (error) {
+      console.log(error)
+    setError(error?.response?.data)
   }
   }
 
@@ -44,7 +47,10 @@ const Login = () => {
         <label className="label">Password</label>
         <input type="password" className="input" placeholder="Password" value={password} onChange={(e)=>setPassword(e.target.value)} />
 
+        {error && <p className='text-red-500 mt-1'>{error}</p>}
+
         <button className="btn btn-neutral mt-4" onClick={handleSubmit}>Login</button>
+        
       </fieldset>
     </div>
     
