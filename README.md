@@ -10,3 +10,7 @@ APP = path "/" -> Body
                     Header 
                     outlet {children} path = "/login or /signup"
                     Footer 
+
+## LOGIN PAGE 
+    login api via axios  - install axios
+    handling cors issue 
