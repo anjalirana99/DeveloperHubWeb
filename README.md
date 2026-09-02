@@ -14,3 +14,8 @@ APP = path "/" -> Body
 ## LOGIN PAGE 
     login api via axios  - install axios
     handling cors issue 
+
+    install Redux 
+    store the logged in user n redux store 
+    show the profile icon of user once loggedin 
+    redirect to feed page after login 

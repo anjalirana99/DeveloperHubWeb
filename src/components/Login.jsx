@@ -1,12 +1,19 @@
 import axios from 'axios'
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { addUser } from '../store/userSlice'
+import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
+
+  const dispatch = useDispatch()
   const [email,setEmail] = useState("rohit@gmail.com")
   const [password, setPassword] = useState("Rohit@123")
+  const navigateTo = useNavigate()
 
   const handleSubmit = async()=>{
-    try{const res = await axios.post('http://localhost:7777/login',
+    try{
+      const res = await axios.post('http://localhost:7777/login',
       {
         email,
         password
@@ -14,11 +21,14 @@ const Login = () => {
       {
         withCredentials: true //For this cross-origin request, include cookies and allow cookies received from the server to be stored.
       }
-    )}
+    )
+
+    dispatch(addUser(res.data.result))
+    navigateTo("/feed")
+
+  }
     catch (err) {
     console.log("ERROR:", err);
-    console.log("STATUS:", err.response?.status);
-    console.log("DATA:", err.response?.data);
   }
   }
 
