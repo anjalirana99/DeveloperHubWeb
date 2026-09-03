@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { BASE_URL } from '../utils/constants'
 import { removeUser } from '../store/userSlice'
+import { removeFeed } from '../store/feedSlice'
 
 const Header = () => {
   const user = useSelector((store)=>store.user)
@@ -13,6 +14,7 @@ const Header = () => {
     try{
       await axios.post(BASE_URL+"/logout",{},{withCredentials: true})
       dispatch(removeUser())
+      dispatch(removeFeed())
       navigateTo("/login")
     }
     catch(err){
