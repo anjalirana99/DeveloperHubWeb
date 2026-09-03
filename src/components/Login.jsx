@@ -8,8 +8,8 @@ import { BASE_URL } from '../utils/constants'
 const Login = () => {
 
   const dispatch = useDispatch()
-  const [email,setEmail] = useState("rohit@gmail.com")
-  const [password, setPassword] = useState("Rohit@123")
+  const [email,setEmail] = useState("anjali@gmail.com")
+  const [password, setPassword] = useState("Anjali@123")
   const [error, setError] = useState("")
   const navigateTo = useNavigate()
 
@@ -31,7 +31,6 @@ const Login = () => {
 
   }
     catch (error) {
-      console.log(error)
     setError(error?.response?.data)
   }
   }
