@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import {BASE_URL} from '../utils/constants'
 import {addUser} from '../store/userSlice'
+import UserCard from './UserCard'
 
 const EditProfile = ({user}) => {
 
@@ -46,9 +47,10 @@ const EditProfile = ({user}) => {
 
   return (
     <>
-    <div className='flex justify-center'>
+    <div className='flex justify-center my-10 gap-5'>
       <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
-        <legend className="fieldset-legend">Edit Profile</legend>
+        <legend className="fieldset-legend mx-auto py-0 text-lg">Edit Profile</legend>
+        
 
         <label className="label">First Name</label>
         <input type="text" className="input" placeholder="Enter your first name" value={firstName}  onChange={(e)=>setFirstName(e.target.value)}/>
@@ -77,27 +79,15 @@ const EditProfile = ({user}) => {
         <button className="btn btn-neutral mt-4" onClick={handleSaveProfile}>Save Profile</button>
 
       </fieldset>
-      <div className="card bg-base-100 w-96 shadow-sm p-4">
-        <figure>
-          <img
-            src={user.photoUrl}
-            alt="User Image" />
-        </figure>
-        <div className="card-body">
-          <h2 className="card-title">{firstName + " " + lastName}</h2>
-          <p>{age +", " + gender}</p>
-          <p>{about}</p>
-          <p>{skills}</p>
-        </div>
+        <UserCard user={{firstName, lastName, age, gender, photoUrl, about, skills}} fromProfilePage={true}/>
       </div>
-    </div>
-    {showToast && 
+      {showToast && 
       <div className="toast toast-top toast-center">
       <div className="alert alert-success">
         <span>Profile saved successfully.</span>
+        </div>
       </div>
-    </div>
-    }
+      }
     
     </>
   )

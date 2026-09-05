@@ -27,7 +27,7 @@ const Login = () => {
     )
 
     dispatch(addUser(res.data.result))
-    navigateTo("/feed")
+    navigateTo("/")
 
   }
     catch (error) {

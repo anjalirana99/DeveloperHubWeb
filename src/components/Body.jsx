@@ -29,11 +29,13 @@ const Body = () => {
     fetchProfile()
   },[])
   return (
-    <>
+    <div className='min-h-screen flex flex-col'>
     <Header/>
+    <div className="flex-1">
     <Outlet/>
+    </div>
     <Footer/>
-    </>
+    </div>
     
   )
 }
