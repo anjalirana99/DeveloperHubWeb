@@ -56,7 +56,7 @@ const EditProfile = ({user}) => {
         <input type="text" className="input" placeholder="Enter your first name" value={firstName}  onChange={(e)=>setFirstName(e.target.value)}/>
 
         <label className="label">Last Name</label>
-        <input type="text" className="input" placeholder="Enter your last name" value={lastName} onChange={(e)=>setLaststName(e.target.value)}/>
+        <input type="text" className="input" placeholder="Enter your last name" value={lastName} onChange={(e)=>setLastName(e.target.value)}/>
 
         <label className="label">PhotoURL</label>
         <input type="text" className="input" placeholder="Enter your photoUrl" value={photoUrl} onChange={(e)=>setPhotoUrl(e.target.value)}/>
