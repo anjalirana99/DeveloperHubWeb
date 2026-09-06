@@ -22,15 +22,19 @@ const Feed = () => {
   useEffect(()=>{
     fetchFeedData()
   },[])
+
+  if(!feed) return
+  if(feed.length === 0){
+    return (
+      <div className='flex justify-center text-3xl m-auto mt-10'>No Devs Found!</div>
+
+    )  
+  }
+
   return (
-    feed ? 
       <div className='flex justify-center my-10'>
         <UserCard key={feed[0]._id} user={feed[0]}/>
-      </div>
-       
-    : 
-      <div className='flex justify-center'><h1 className='text-xl'>No Devs Found!!!</h1></div>
-    
+      </div>    
   )
 }
 
