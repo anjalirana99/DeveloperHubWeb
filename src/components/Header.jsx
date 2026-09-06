@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { BASE_URL } from '../utils/constants'
 import { removeUser } from '../store/userSlice'
 import { removeFeed } from '../store/feedSlice'
+import { clearStore } from '../utils/helper'
 
 const Header = () => {
   const user = useSelector((store)=>store.user)
@@ -13,8 +14,7 @@ const Header = () => {
   const handleLogout = async()=>{
     try{
       await axios.post(BASE_URL+"/logout",{},{withCredentials: true})
-      dispatch(removeUser())
-      dispatch(removeFeed())
+      clearStore(dispatch)
       navigateTo("/login")
     }
     catch(err){
