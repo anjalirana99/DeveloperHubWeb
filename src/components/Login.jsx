@@ -2,7 +2,7 @@ import axios from 'axios'
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { addUser } from '../store/userSlice'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { BASE_URL } from '../utils/constants'
 
 const Login = () => {
@@ -49,7 +49,8 @@ const Login = () => {
         {error && <p className='text-red-500 mt-1'>{error}</p>}
 
         <button className="btn btn-neutral mt-4" onClick={handleSubmit}>Login</button>
-        
+        <p>Don't have an account ? <Link to="/signup"> Sign Up</Link></p>
+
       </fieldset>
     </div>
     
