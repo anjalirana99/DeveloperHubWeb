@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { createSocketConnection } from '../utils/socket'
+import { BASE_URL } from '../utils/constants'
+import axios from 'axios'
 
 const Chat = () => {
     const user = useSelector((store)=>store.user)
@@ -10,6 +12,28 @@ const Chat = () => {
     const [newMessage , setNewMessage]  = useState('')
     const [messages , setMessages] = useState([])
 
+    const fetchChat = async ()=>{
+        try{
+            const res = await axios.get(BASE_URL + "/chat/" + targetId , {withCredentials : true})
+            const chatMessages = res?.data?.results?.messages.map((msgs)=>{
+                    const {senderId, text} = msgs
+                    return {
+                        senderId : senderId._id,
+                        firstName : senderId.firstName,
+                        lastName : senderId.lastName,
+                        text : text
+                    }
+            })
+            setMessages(chatMessages)
+
+        }
+        catch(err){
+            console.log("ERROR: " + err.response)
+        }
+    }
+    useEffect(()=>{
+        fetchChat()
+    },[])
     useEffect(()=>{
         if(!userId)return 
         const socket = createSocketConnection()
@@ -47,21 +71,22 @@ const Chat = () => {
         <div className='flex-1 overflow-y-auto p-2'>
             {messages.map((msg,index)=>{
                 return(
-                    <div key={index} className="chat chat-start">
-                        <div className="chat-image avatar">
+                    <div key={index} className={"chat my-2 " +  (userId === msg.senderId ? "chat-end" : "chat-start")}>
+                        
+                        {/* <div className="chat-image avatar">
                             <div className="w-10 rounded-full">
                             <img
-                                alt="Tailwind CSS chat bubble component"
+                                alt=""
                                 src="https://img.daisyui.com/images/profile/demo/kenobee@192.webp"
                             />
                             </div>
-                        </div>
-                        <div className="chat-header">
-                            {msg.firstName}
-                            <time className="text-xs opacity-50">12:45</time>
+                        </div> */}
+                        <div className="chat-header"> 
+                            {`${msg.firstName} ${msg.lastName}`}
+                            <time className="text-xs opacity-50"></time>
                         </div>
                         <div className="chat-bubble">{msg.text}</div>
-                        <div className="chat-footer opacity-50">Delivered</div>
+                        <div className="chat-footer opacity-50"></div>
                         </div>
                 )
             })}
